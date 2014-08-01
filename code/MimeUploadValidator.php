@@ -12,7 +12,7 @@ class MimeUploadValidator extends Upload_Validator {
 	 *
 	 * @var string Regexp pattern
 	 */
-	protected $filterPattern = '/.*[\/>\-\+]/i';
+	protected $filterPattern = '/.*[\/\.\-\+]/i';
 
 	public function setFilterPattern($pattern) {
 		$this->filterPattern = $pattern;
