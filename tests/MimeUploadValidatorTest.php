@@ -19,6 +19,7 @@ class MimeUploadValidatorTest extends SapphireTest {
 		);
 
 		$u = new Upload();
+		$u->setValidator(new MimeUploadValidator());
 		$result = $u->load($tmpFile);
 		$errors = $u->getErrors();
 		$this->assertFalse($result, 'Load failed because file extension does not match excepted MIME type');
