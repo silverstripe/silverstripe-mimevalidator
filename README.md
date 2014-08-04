@@ -1,5 +1,7 @@
 # MIME upload validator
 
+[![Build Status](https://travis-ci.org/silverstripe-labs/silverstripe-mimevalidator.svg?branch=master)](https://travis-ci.org/silverstripe-labs/silverstripe-mimevalidator)
+
 ## Introduction
 
 Checks uploaded file content roughly matches a known MIME type for the file extension.
