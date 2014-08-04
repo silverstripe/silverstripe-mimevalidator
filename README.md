@@ -6,7 +6,7 @@
 
 Checks uploaded file content roughly matches a known MIME type for the file extension.
 
-It can be used with either `FileField` or `UploadField`.
+It can be used with `FileField` or any subclasses like `UploadField`.
 
 For example, it will fail validation if someone renames a `.exe` file to `.jpg`
 and attempts to upload the file.
