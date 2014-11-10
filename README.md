@@ -42,3 +42,15 @@ is released, or use the 3.1 branch of framework in your project.
 	$field = UploadField::create();
 	$field->setValidator(new MimeUploadValidator());
 
+### Adding MIME types
+
+By default MIME types are checked against HTTP.MimeTypes config set in framework. This can be limiting as this only
+allows for one MIME type per extension. To allow for multiple MIME types per extension, you can add these in your YAML
+config as below:
+
+	MimeUploadValidator:
+  	  MimeTypes:
+        ics:
+          - 'text/plain'
+          - 'text/calendar'
+

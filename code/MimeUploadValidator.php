@@ -56,7 +56,7 @@ class MimeUploadValidator extends Upload_Validator {
 	 * @return array
 	 */
 	public function getExpectedMimeTypes($tmpFile) {
-		$extension = pathinfo($tmpFile['name'], PATHINFO_EXTENSION);
+		$extension = strtolower(pathinfo($tmpFile['name'], PATHINFO_EXTENSION));
 
 		// we can't check filenames without an extension or no temp file path, let them pass validation.
 		if(!$extension || !$tmpFile['tmp_name']) return true;
@@ -64,7 +64,6 @@ class MimeUploadValidator extends Upload_Validator {
 		// if the finfo php extension isn't loaded, we can't complete this check.
 		if(!class_exists('finfo')) {
 			throw new MimeUploadValidator_Exception('PHP extension finfo is not loaded');
-			return array();
 		}
 
 		// Attempt to figure out which mime types are expected/acceptable here.
@@ -80,7 +79,7 @@ class MimeUploadValidator extends Upload_Validator {
 		$knownMimes = Config::inst()->get(get_class($this), 'MimeTypes');
 		if(isset($knownMimes[$extension])) {
 			if(is_array($knownMimes[$extension])) {
-				$expectedMimes = array_merge($expectedMimes, $knownMimes[$extension]);
+				$expectedMimes += $knownMimes[$extension];
 			} else {
 				$expectedMimes[] = $knownMimes[$extension];
 			}
@@ -104,7 +103,7 @@ class MimeUploadValidator extends Upload_Validator {
 	 * @return boolean
 	 */
 	public function compareMime($first, $second) {
-		return preg_replace($this->filterPattern, '', $first) == preg_replace($this->filterPattern, '', $second);
+		return preg_replace($this->filterPattern, '', $first) === preg_replace($this->filterPattern, '', $second);
 	}
 
 	public function validate() {
