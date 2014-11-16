@@ -1,0 +1,9 @@
+---
+Name: mimevalidator
+---
+MimeUploadValidator:
+  MimeTypes:
+    ico:
+      - 'image/vnd.microsoft.icon'
+      - 'image/x-icon'
+      - 'image/x-ico'

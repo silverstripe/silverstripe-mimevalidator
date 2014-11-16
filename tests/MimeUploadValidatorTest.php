@@ -28,6 +28,35 @@ class MimeUploadValidatorTest extends SapphireTest {
 		unlink($tmpFilePath);
 	}
 
+
+	public function testGetExpectedMimeTypes() {
+		// Setup a file with a capitalised extension and try to match it against a lowercase file.
+		$tmpFileName = 'text.TXT';
+		$tmpFilePath = TEMP_FOLDER . '/' . $tmpFileName;
+		$tmpFileContent = '';
+		for($i=0; $i<10000; $i++) $tmpFileContent .= '0';
+		file_put_contents($tmpFilePath, $tmpFileContent);
+
+		$validator = new MimeUploadValidator();
+		$tmpFile = array(
+			'name' => $tmpFileName,
+			'tmp_name' => $tmpFilePath,
+		);
+		$expected = $validator->getExpectedMimeTypes($tmpFile);
+		$this->assertCount(1, $expected);
+		$this->assertContains('text/plain', $expected);
+
+		unlink($tmpFilePath);
+
+		// Test a physical ico file with capitalised extension
+		$tmpFile = array(
+			'name' => 'favicon.ICO',
+			'tmp_name' => 'assets/favicon.ICO',
+		);
+		$expected = $validator->getExpectedMimeTypes($tmpFile);
+		$this->assertCount(3, $expected);
+	}
+
 	public function testMimeComparison() {
 		$validator = new MimeUploadValidator();
 
