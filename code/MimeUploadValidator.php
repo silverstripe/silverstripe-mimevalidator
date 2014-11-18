@@ -29,6 +29,11 @@ class MimeUploadValidator extends Upload_Validator {
 	 * @return boolean|null
 	 */
 	public function isValidMime() {
+                $extension = strtolower(pathinfo($this->tmpFile['name'], PATHINFO_EXTENSION));
+
+                // we can't check filenames without an extension or no temp file path, let them pass validation.
+                if(!$extension || !$this->tmpFile['tmp_name']) return true;
+
 		$expectedMimes = $this->getExpectedMimeTypes($this->tmpFile);
 		if(empty($expectedMimes)) {
 			throw new MimeUploadValidator_Exception(
@@ -57,9 +62,6 @@ class MimeUploadValidator extends Upload_Validator {
 	 */
 	public function getExpectedMimeTypes($tmpFile) {
 		$extension = strtolower(pathinfo($tmpFile['name'], PATHINFO_EXTENSION));
-
-		// we can't check filenames without an extension or no temp file path, let them pass validation.
-		if(!$extension || !$tmpFile['tmp_name']) return true;
 
 		// if the finfo php extension isn't loaded, we can't complete this check.
 		if(!class_exists('finfo')) {
