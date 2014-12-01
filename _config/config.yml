@@ -7,3 +7,8 @@ MimeUploadValidator:
       - 'image/vnd.microsoft.icon'
       - 'image/x-icon'
       - 'image/x-ico'
+    ics:
+      - 'text/plain'
+    xlsx:
+      - 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      - 'application/zip'
