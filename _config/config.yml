@@ -12,3 +12,5 @@ MimeUploadValidator:
     xlsx:
       - 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       - 'application/zip'
+    docx:
+      - 'application/zip'
