@@ -1,0 +1,4 @@
+en:
+  File:
+    FAILEDMIMECHECK: 'MIME validation failed: {message}'
+    INVALIDMIME: 'File extension does not match known MIME type'
