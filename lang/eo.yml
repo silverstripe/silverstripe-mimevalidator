@@ -1,0 +1,4 @@
+eo:
+  File:
+    FAILEDMIMECHECK: 'Malsukcesis validigo de MIME : {mesaĝo}'
+    INVALIDMIME: 'Sufikso de dosiernomo ne kongruas al konata MIME-tipo'
