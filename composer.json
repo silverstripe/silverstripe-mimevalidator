@@ -2,7 +2,7 @@
 	"name": "silverstripe/mimevalidator",
 	"description": "Checks uploaded file content roughly matches a known MIME type for the file extension.",
 	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "mime", "upload", "validator", "fileinfo"],
+	"keywords": ["silverstripe", "mime", "upload", "validator", "fileinfo", "cwp"],
 	"license": "BSD-3-Clause",
 	"authors": [
 		{
