@@ -15,3 +15,72 @@ MimeUploadValidator:
     docx:
       - 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       - 'application/zip'
+    docm:
+      - 'application/vnd.ms-word.document.macroEnabled.12'
+      - 'application/zip'
+    dotx:
+      - 'application/vnd.openxmlformats-officedocument.wordprocessingml.template'
+      - 'application/zip'
+    dotm:
+      - 'application/vnd.ms-word.template.macroEnabled.12'
+      - 'application/zip'
+    xlsx:
+      - 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      - 'application/zip'
+    xlsm:
+      - 'application/vnd.ms-excel.sheet.macroEnabled.12'
+      - 'application/zip'
+    xltx:
+      - 'application/vnd.openxmlformats-officedocument.spreadsheetml.template'
+      - 'application/zip'
+    xltm:
+      - 'application/vnd.ms-excel.template.macroEnabled.12'
+      - 'application/zip'
+    xlsb:
+      - 'application/vnd.ms-excel.sheet.binary.macroEnabled.12'
+      - 'application/zip'
+    xlam:
+      - 'application/vnd.ms-excel.addin.macroEnabled.12'
+      - 'application/zip'
+    pptx:
+      - 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+      - 'application/zip'
+    pptm:
+      - 'application/vnd.ms-powerpoint.presentation.macroEnabled.12'
+      - 'application/zip'
+    ppsx:
+      - 'application/vnd.openxmlformats-officedocument.presentationml.slideshow'
+      - 'application/zip'
+    ppsm:
+      - 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12'
+      - 'application/zip'
+    potx:
+      - 'application/vnd.openxmlformats-officedocument.presentationml.template'
+      - 'application/zip'
+    potm:
+      - 'application/vnd.ms-powerpoint.template.macroEnabled.12'
+      - 'application/zip'
+    ppam:
+      - 'application/vnd.ms-powerpoint.addin.macroEnabled.12'
+      - 'application/zip'
+    sldx:
+      - 'application/vnd.openxmlformats-officedocument.presentationml.slide'
+      - 'application/zip'
+    sldm:
+      - 'application/vnd.ms-powerpoint.slide.macroEnabled.12'
+      - 'application/zip'
+    one:
+      - 'application/msonenote'
+      - 'application/zip'
+    onetoc2:
+      - 'application/msonenote'
+      - 'application/zip'
+    onetmp:
+      - 'application/msonenote'
+      - 'application/zip'
+    onepkg:
+      - 'application/msonenote'
+      - 'application/zip'
+    thmx:
+      - 'application/vnd.ms-officetheme'
+      - 'application/zip'
