@@ -63,7 +63,7 @@ HTML;
 		);
 
 		// use our test validator to bypass upload validation
-		$file->setValidator(new MIMETest_Validator());
+		$file->setValidator(new FileMIMETester_Validator());
 
 		return $form;
 	}
@@ -81,13 +81,17 @@ HTML;
 
 		// get the tmp file info
 		$tmpFile = $upload->getValidator()->getTmpFile();
-		
-		$finfo = new finfo(FILEINFO_MIME_TYPE);
 
-		// get the mime type from the tmp file path as this is how the MimeUploadValidator behaves
-		$mimeType = $finfo->file($tmpFile['tmp_name']);
+		if(class_exists('finfo')) {
+			$finfo = new finfo(FILEINFO_MIME_TYPE);
 
-		$this->redirect($this->Link() . 'complete?type=' . $mimeType);
+			// get the mime type from the tmp file path as this is how the MimeUploadValidator behaves
+			$mimeType = $finfo->file($tmpFile['tmp_name']);
+
+			$this->redirect($this->Link() . 'complete?type=' . $mimeType);
+		} else {
+			$this->redirect($this->Link() . 'complete?finfo=0');
+		}
 	}
 
 	/**
@@ -99,14 +103,17 @@ HTML;
 
 		// get the MIME type from the URL
 		$type = isset($getVars['type']) ? $getVars['type'] : '';
+		$finfoError = isset($getVars['finfo']);
+
+		if($finfoError) {
+			$content = "Sorry, the MIME type could not be determined as the finfo php module is not currently installed";
+		} else {
+			$content = '<p>File MIME type: ' . $type . '</p>';
+		}
 
 		return array(
-			'Content' => sprintf(
-				'<p>File MIME type: %s</p><p><a href="%s">Try another file</a></p>',
-				$type,
-				$this->Link()
-			),
-			'Form' => ''
+			'Content' => $content,
+			'Form' => $this->Form()
 		);
 	}
 
@@ -120,7 +127,7 @@ HTML;
  *
  * Note: The upload size limit will still be enforced
  */
-class MIMETest_Validator extends Upload_Validator {
+class FileMIMETester_Validator extends Upload_Validator {
 
 	/**
 	 * Custom getter to access the protected $tmpFile data
