@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.6]
+
+* Add standard editor config
+* Add standard Travis config
+* Converted to PSR-2
+* Added standard Scrutinizer config	
+* Added standard code of conduct
+
 ## [1.0.5]
 
 * Changelog added
