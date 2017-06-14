@@ -1,6 +1,6 @@
 # MIME upload validator
 
-[![Build Status](https://travis-ci.org/silverstripe-labs/silverstripe-mimevalidator.svg?branch=master)](https://travis-ci.org/silverstripe-labs/silverstripe-mimevalidator)
+[![Build Status](https://travis-ci.org/silverstripe/silverstripe-mimevalidator.svg?branch=master)](https://travis-ci.org/silverstripe/silverstripe-mimevalidator)
 
 ## Introduction
 
