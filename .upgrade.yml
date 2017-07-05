@@ -1,0 +1,3 @@
+mappings:
+  MimeUploadValidator: SilverStripe\MimeValidator\MimeUploadValidator
+  MimeUploadValidator_Exception: SilverStripe\MimeValidator\MimeUploadValidator_Exception

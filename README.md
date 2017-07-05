@@ -13,7 +13,7 @@ and attempts to upload the file.
 
 ## Requirements
 
- * SilverStripe 3.1+
+ * SilverStripe 4.0+
  * fileinfo PHP extension
 
 ## Installation via Composer
@@ -32,10 +32,6 @@ In your `mysite/_config/config.yml` file:
 	Injector:
 	  Upload_Validator:
 	    class: MimeUploadValidator
-
-NOTE: This will *not* work in SilverStripe 3.1.5, as there is no injector
-support for `Upload_Validator`. You will need to wait until 3.1.6 or greater
-is released, or use the 3.1 branch of framework in your project.
 
 ### Enable on an individual upload field
 
