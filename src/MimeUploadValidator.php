@@ -1,8 +1,21 @@
 <?php
+
+namespace SilverStripe\MimeValidator;
+
+use finfo;
+use Exception;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Control\HTTP;
+use SilverStripe\Assets\Upload_Validator;
+
+
 /**
  * Adds an additional validation rule to Upload_Validator that attempts to detect
  * the file extension of an uploaded file matches it's contents, which is done
  * by detecting the MIME type and doing a fuzzy match.
+ *
+ * Class MimeUploadValidator
+ * @package SilverStripe\MimeValidator
  */
 class MimeUploadValidator extends Upload_Validator
 {
@@ -14,11 +27,17 @@ class MimeUploadValidator extends Upload_Validator
      */
     protected $filterPattern = '/.*[\/\.\-\+]/i';
 
+    /**
+     * @param string $pattern
+     */
     public function setFilterPattern($pattern)
     {
         $this->filterPattern = $pattern;
     }
 
+    /**
+     * @return string
+     */
     public function getFilterPattern()
     {
         return $this->filterPattern;
@@ -28,16 +47,17 @@ class MimeUploadValidator extends Upload_Validator
      * Check if the temporary file has a valid MIME type for it's extension.
      *
      * @uses finfo php extension
-     * @return boolean|null
+     * @return bool|null
+     * @throws MimeUploadValidator_Exception
      */
     public function isValidMime()
     {
         $extension = strtolower(pathinfo($this->tmpFile['name'], PATHINFO_EXTENSION));
 
-                // we can't check filenames without an extension or no temp file path, let them pass validation.
-                if (!$extension || !$this->tmpFile['tmp_name']) {
-                    return true;
-                }
+        // we can't check filenames without an extension or no temp file path, let them pass validation.
+        if (!$extension || !$this->tmpFile['tmp_name']) {
+            return true;
+        }
 
         $expectedMimes = $this->getExpectedMimeTypes($this->tmpFile);
         if (empty($expectedMimes)) {
@@ -46,8 +66,8 @@ class MimeUploadValidator extends Upload_Validator
             );
         }
 
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        $foundMime = $finfo->file($this->tmpFile['tmp_name']);
+        $fileInfo = new finfo(FILEINFO_MIME_TYPE);
+        $foundMime = $fileInfo->file($this->tmpFile['tmp_name']);
         if (!$foundMime) {
             throw new MimeUploadValidator_Exception(
                 sprintf('Could not find a MIME type for file %s', $this->tmpFile['tmp_name'])
@@ -59,17 +79,20 @@ class MimeUploadValidator extends Upload_Validator
                 return true;
             }
         }
+
         return false;
     }
 
     /**
      * Fetches an array of valid mimetypes.
      *
+     * @param $file
      * @return array
+     * @throws MimeUploadValidator_Exception
      */
-    public function getExpectedMimeTypes($tmpFile)
+    public function getExpectedMimeTypes($file)
     {
-        $extension = strtolower(pathinfo($tmpFile['name'], PATHINFO_EXTENSION));
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
         // if the finfo php extension isn't loaded, we can't complete this check.
         if (!class_exists('finfo')) {
@@ -80,21 +103,23 @@ class MimeUploadValidator extends Upload_Validator
         $expectedMimes = array();
 
         // Get the mime types set in framework core
-        $knownMimes = Config::inst()->get('HTTP', 'MimeTypes');
+        $knownMimes = Config::inst()->get(HTTP::class, 'MimeTypes');
         if (isset($knownMimes[$extension])) {
             $expectedMimes[] = $knownMimes[$extension];
         }
 
-        // Get the mime types and their variations from mimevalidator
+        // Get the mime types and their variations from mime validator
         $knownMimes = Config::inst()->get(get_class($this), 'MimeTypes');
         if (isset($knownMimes[$extension])) {
           $mimes = (array) $knownMimes[$extension];
+
           foreach($mimes as $mime){
-              if(!in_array($mime,$expectedMimes)){
+              if (!in_array($mime,$expectedMimes)) {
                   $expectedMimes[] = $mime;
               }
           }
         }
+
         return $expectedMimes;
     }
 
@@ -126,11 +151,13 @@ class MimeUploadValidator extends Upload_Validator
 
         try {
             $result = $this->isValidMime();
+
             if ($result === false) {
                 $this->errors[] = _t(
                     'File.INVALIDMIME',
                     'File extension does not match known MIME type'
                 );
+
                 return false;
             }
         } catch (MimeUploadValidator_Exception $e) {
@@ -138,8 +165,9 @@ class MimeUploadValidator extends Upload_Validator
                 'File.FAILEDMIMECHECK',
                 'MIME validation failed: {message}',
                 'Argument 1: Message about why MIME type detection failed',
-                array('message' => $e->getMessage())
+                ['message' => $e->getMessage()]
             );
+
             return false;
         }
 

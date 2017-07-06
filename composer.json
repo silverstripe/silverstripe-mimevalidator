@@ -1,25 +1,30 @@
 {
-	"name": "silverstripe/mimevalidator",
-	"description": "Checks uploaded file content roughly matches a known MIME type for the file extension.",
-	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "mime", "upload", "validator", "fileinfo", "cwp"],
-	"license": "BSD-3-Clause",
-	"authors": [
-		{
-			"name": "Sean Harvey",
-			"email": "sean@silverstripe.com"
-		}
-	],
-	"minimum-stability": "dev",
-	"require": {
-		"silverstripe/framework": "~3.1"
-	},
-	"extra": 
-	{
-		"branch-alias": 
-		{
-			"dev-master": "2.0.x-dev"
-		}
-	}
+    "name": "silverstripe/mimevalidator",
+    "description": "Checks uploaded file content roughly matches a known MIME type for the file extension.",
+    "type": "silverstripe-module",
+    "keywords": ["silverstripe", "mime", "upload", "validator", "fileinfo", "cwp"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Sean Harvey",
+            "email": "sean@silverstripe.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "silverstripe/framework": "^4.0"
+    },
+    "extra":
+    {
+        "branch-alias":
+        {
+            "dev-master": "2.0.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SilverStripe\\MimeValidator\\": "src/",
+            "SilverStripe\\MimeValidator\\Tests\\": "tests/"
+        }
+    }
 }
-
