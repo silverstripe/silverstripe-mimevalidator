@@ -1,0 +1,4 @@
+fi:
+  File:
+    FAILEDMIMECHECK: 'MIME tarkastus aiheutti virheen: {message}'
+    INVALIDMIME: 'Tiedostopääte ei vastaa yhtään tunnistettua MIME-tyyppiä'
