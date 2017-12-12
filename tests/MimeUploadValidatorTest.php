@@ -5,6 +5,7 @@ namespace SilverStripe\MimeValidator\Tests;
 use SilverStripe\Assets\Upload;
 use SilverStripe\MimeValidator\MimeUploadValidator;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Config\Config;
 
 /**
  * Class MimeUploadValidatorTest
@@ -75,8 +76,18 @@ class MimeUploadValidatorTest extends SapphireTest
             'tmp_name' => 'assets/favicon.ICO',
         ];
 
+        // Ensure that site configuration doesn't interfere with the test
+        $icoMimes = [
+            'ico' => [
+                'image/vnd.microsoft.icon',
+                'image/x-icon',
+                'image/x-ico'
+            ]
+        ];
+        Config::modify()->set(MimeUploadValidator::class, 'MimeTypes', $icoMimes);
+
         $expected = $validator->getExpectedMimeTypes($tmpFile);
-        $this->assertCount(1, $expected);
+        $this->assertCount(3, $expected);
         $this->assertContains('image/x-icon', $expected);
     }
 
