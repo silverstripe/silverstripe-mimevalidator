@@ -34,8 +34,8 @@ class MimeUploadValidatorTest extends SapphireTest
             'error' => UPLOAD_ERR_OK,
         ];
 
-        $upload = new Upload();
-        $upload->setValidator(new MimeUploadValidator());
+        $upload = Upload::create();
+        $upload->setValidator(MimeUploadValidator::create());
         $result = $upload->load($tmpFile);
         $errors = $upload->getErrors();
 
@@ -58,7 +58,7 @@ class MimeUploadValidatorTest extends SapphireTest
 
         file_put_contents($tmpFilePath, $tmpFileContent);
 
-        $validator = new MimeUploadValidator();
+        $validator = MimeUploadValidator::create();
         $tmpFile = [
             'name' => $tmpFileName,
             'tmp_name' => $tmpFilePath,
@@ -93,7 +93,7 @@ class MimeUploadValidatorTest extends SapphireTest
 
     public function testMimeComparison()
     {
-        $validator = new MimeUploadValidator();
+        $validator = MimeUploadValidator::create();
 
         $this->assertTrue($validator->compareMime('application/xhtml+xml', 'application/xml'));
         $this->assertTrue($validator->compareMime('application/vnd.text', 'application/text'));

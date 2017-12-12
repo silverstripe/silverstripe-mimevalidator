@@ -16,7 +16,7 @@ and attempts to upload the file.
 ## Requirements
 
  * SilverStripe 4.0+
- * fileinfo PHP extension
+ * fileinfo [PHP extension](http://php.net/manual/en/intro.fileinfo.php)
 
 **Note:** For a SilverStripe 3.x compatible version, please use [the 1.x release line](https://github.com/silverstripe/silverstripe-mimevalidator/tree/1.0).
 
@@ -34,8 +34,8 @@ In your `mysite/_config/config.yml` file:
 
 ```yml
 SilverStripe\Core\Injector\Injector:
-  Upload_Validator:
-    class: MimeUploadValidator
+  SilverStripe\Assets\Upload_Validator:
+    class: SilverStripe\MimeValidator\MimeUploadValidator
 ```
 
 ### Enable on an individual upload field

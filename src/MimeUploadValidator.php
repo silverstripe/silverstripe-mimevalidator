@@ -109,7 +109,7 @@ class MimeUploadValidator extends Upload_Validator
         }
 
         // Get the mime types and their variations from mime validator
-        $knownMimes = Config::inst()->get(get_class($this), 'MimeTypes');
+        $knownMimes = $this->config()->get('MimeTypes');
         if (isset($knownMimes[$extension])) {
           $mimes = (array) $knownMimes[$extension];
 
