@@ -154,7 +154,7 @@ class MimeUploadValidator extends Upload_Validator
 
             if ($result === false) {
                 $this->errors[] = _t(
-                    'File.INVALIDMIME',
+                    __CLASS__ . '.INVALIDMIME',
                     'File extension does not match known MIME type'
                 );
 
@@ -162,7 +162,7 @@ class MimeUploadValidator extends Upload_Validator
             }
         } catch (MimeUploadValidator_Exception $e) {
             $this->errors[] = _t(
-                'File.FAILEDMIMECHECK',
+                __CLASS__ . '.FAILEDMIMECHECK',
                 'MIME validation failed: {message}',
                 'Argument 1: Message about why MIME type detection failed',
                 ['message' => $e->getMessage()]
@@ -173,8 +173,4 @@ class MimeUploadValidator extends Upload_Validator
 
         return true;
     }
-}
-
-class MimeUploadValidator_Exception extends Exception
-{
 }

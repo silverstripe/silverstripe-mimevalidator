@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^4.0"
+        "ext-fileinfo": "*",
+        "silverstripe/framework": "^4"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",

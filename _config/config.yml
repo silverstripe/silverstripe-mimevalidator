@@ -1,7 +1,7 @@
 ---
 Name: mimevalidator
 ---
-MimeUploadValidator:
+SilverStripe\MimeValidator\MimeUploadValidator:
   MimeTypes:
     ico:
       - 'image/vnd.microsoft.icon'
