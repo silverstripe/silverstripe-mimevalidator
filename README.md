@@ -1,6 +1,8 @@
 # MIME upload validator
 
-[![Build Status](https://travis-ci.org/silverstripe/silverstripe-mimevalidator.svg?branch=master)](https://travis-ci.org/silverstripe/silverstripe-mimevalidator)
+[![Build Status](http://img.shields.io/travis/silverstripe/silverstripe-mimevalidator.svg?style=flat)](https://travis-ci.org/silverstripe/silverstripe-mimevalidator)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/silverstripe/silverstripe-mimevalidator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/silverstripe/silverstripe-mimevalidator/?branch=master)
+[![codecov](https://codecov.io/gh/silverstripe/silverstripe-mimevalidator/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-mimevalidator)
 
 ## Introduction
 
@@ -16,10 +18,11 @@ and attempts to upload the file.
  * SilverStripe 4.0+
  * fileinfo PHP extension
 
+**Note:** For a SilverStripe 3.x compatible version, please use [the 1.x release line](https://github.com/silverstripe/silverstripe-mimevalidator/tree/1.0).
+
 ## Installation via Composer
 
-	cd path/to/my/silverstripe/site
-	composer require "silverstripe/mimevalidator:*"
+Install with composer by running `composer require silverstripe/mimevalidator` in the root of your SilverStripe project.
 
 ## Configuration
 
@@ -29,14 +32,18 @@ The validator is not used by default. It can be enabled in a couple of ways:
 
 In your `mysite/_config/config.yml` file:
 
-	Injector:
-	  Upload_Validator:
-	    class: MimeUploadValidator
+```yml
+SilverStripe\Core\Injector\Injector:
+  Upload_Validator:
+    class: MimeUploadValidator
+```
 
 ### Enable on an individual upload field
 
-	$field = UploadField::create();
-	$field->setValidator(new MimeUploadValidator());
+```php
+$field = UploadField::create();
+$field->setValidator(MimeUploadValidator::create());
+```
 
 ### Adding MIME types
 
@@ -44,9 +51,10 @@ By default MIME types are checked against HTTP.MimeTypes config set in framework
 allows for one MIME type per extension. To allow for multiple MIME types per extension, you can add these in your YAML
 config as below:
 
-	MimeUploadValidator:
-  	  MimeTypes:
-        ics:
-          - 'text/plain'
-          - 'text/calendar'
-
+```yml
+SilverStripe\MimeValidator\MimeUploadValidator:
+  MimeTypes:
+    ics:
+      - 'text/plain'
+      - 'text/calendar'
+```
