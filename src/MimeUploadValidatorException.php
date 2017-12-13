@@ -4,6 +4,6 @@ namespace SilverStripe\MimeValidator;
 
 use Exception;
 
-class MimeUploadValidator_Exception extends Exception
+class MimeUploadValidatorException extends Exception
 {
 }
