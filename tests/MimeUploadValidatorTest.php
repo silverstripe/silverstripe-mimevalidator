@@ -5,6 +5,7 @@ namespace SilverStripe\MimeValidator\Tests;
 use SilverStripe\Assets\Upload;
 use SilverStripe\MimeValidator\MimeUploadValidator;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Config\Config;
 
 /**
  * Class MimeUploadValidatorTest
@@ -33,8 +34,8 @@ class MimeUploadValidatorTest extends SapphireTest
             'error' => UPLOAD_ERR_OK,
         ];
 
-        $upload = new Upload();
-        $upload->setValidator(new MimeUploadValidator());
+        $upload = Upload::create();
+        $upload->setValidator(MimeUploadValidator::create());
         $result = $upload->load($tmpFile);
         $errors = $upload->getErrors();
 
@@ -57,7 +58,7 @@ class MimeUploadValidatorTest extends SapphireTest
 
         file_put_contents($tmpFilePath, $tmpFileContent);
 
-        $validator = new MimeUploadValidator();
+        $validator = MimeUploadValidator::create();
         $tmpFile = [
             'name' => $tmpFileName,
             'tmp_name' => $tmpFilePath,
@@ -75,14 +76,24 @@ class MimeUploadValidatorTest extends SapphireTest
             'tmp_name' => 'assets/favicon.ICO',
         ];
 
+        // Ensure that site configuration doesn't interfere with the test
+        $icoMimes = [
+            'ico' => [
+                'image/vnd.microsoft.icon',
+                'image/x-icon',
+                'image/x-ico'
+            ]
+        ];
+        Config::modify()->set(MimeUploadValidator::class, 'MimeTypes', $icoMimes);
+
         $expected = $validator->getExpectedMimeTypes($tmpFile);
-        $this->assertCount(1, $expected);
+        $this->assertCount(3, $expected);
         $this->assertContains('image/x-icon', $expected);
     }
 
     public function testMimeComparison()
     {
-        $validator = new MimeUploadValidator();
+        $validator = MimeUploadValidator::create();
 
         $this->assertTrue($validator->compareMime('application/xhtml+xml', 'application/xml'));
         $this->assertTrue($validator->compareMime('application/vnd.text', 'application/text'));

@@ -1,3 +1,3 @@
 id:
-  File:
+  SilverStripe\MimeValidator\MimeUploadValidator:
     FAILEDMIMECHECK: 'MIME gagal validasi: {message}'
