@@ -150,11 +150,14 @@ class MimeUploadValidator extends Upload_Validator
 
         try {
             $result = $this->isValidMime();
-
             if ($result === false) {
+                $extension = strtolower(pathinfo($this->tmpFile['name'], PATHINFO_EXTENSION));
                 $this->errors[] = _t(
                     __CLASS__ . '.INVALIDMIME',
-                    'File extension does not match known MIME type'
+                    'File type does not match extension (.{extension})',
+                    [
+                        'extension' => $extension,
+                    ]
                 );
 
                 return false;
