@@ -27,35 +27,4 @@ Install with composer by running `composer require silverstripe/mimevalidator` i
 
 ## Configuration
 
-The validator is not used by default. It can be enabled in a couple of ways:
-
-### Enable globally
-
-In your `mysite/_config/config.yml` file:
-
-```yml
-SilverStripe\Core\Injector\Injector:
-  SilverStripe\Assets\Upload_Validator:
-    class: SilverStripe\MimeValidator\MimeUploadValidator
-```
-
-### Enable on an individual upload field
-
-```php
-$field = UploadField::create();
-$field->setValidator(MimeUploadValidator::create());
-```
-
-### Adding MIME types
-
-By default MIME types are checked against HTTP.MimeTypes config set in framework. This can be limiting as this only
-allows for one MIME type per extension. To allow for multiple MIME types per extension, you can add these in your YAML
-config as below:
-
-```yml
-SilverStripe\MimeValidator\MimeUploadValidator:
-  MimeTypes:
-    ics:
-      - 'text/plain'
-      - 'text/calendar'
-```
+Read [Allowed file types on the Silverstripe CMS documentation](https://docs.silverstripe.org/en/4/developer_guides/files/allowed_file_types/) for details on configuring MIME type validation.
