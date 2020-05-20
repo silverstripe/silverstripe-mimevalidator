@@ -9,11 +9,12 @@ services:
 env:
   global:
     - COMPOSER_ROOT_VERSION=2.x-dev
+    - RECIPE_CORE_VERSION: 4.x
 
 matrix:
   include:
     - php: 5.6
-      env: DB=MYSQL PHPUNIT_TEST=1
+      env: DB=MYSQL PHPUNIT_TEST=1 RECIPE_CORE_VERSION=4.4.x
     - php: 7.0
       env: DB=MYSQL PHPUNIT_TEST=1
     - php: 7.1
@@ -31,6 +32,7 @@ before_script:
   # Install composer dependencies
   - composer validate
   - if [[ $DB == PGSQL ]]; then composer require --no-update silverstripe/postgresql:^2; fi
+  - composer require --no-update silverstripe/recipe-core:$RECIPE_CORE_VERSION
   - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
 script:
