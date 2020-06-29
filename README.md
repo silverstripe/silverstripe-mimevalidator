@@ -25,6 +25,10 @@ and attempts to upload the file.
 
 Install with composer by running `composer require silverstripe/mimevalidator` in the root of your SilverStripe project.
 
+Silverstripe CMS Recipe 4.6 and above include this module via `silverstripe/recipe-core`.
+Therefore, it is unnecessary to directly install this module if your project has been upgraded to,
+or was created with CMS Recipe 4.6.0 or later.
+
 ## Configuration
 
 Read [Allowed file types on the Silverstripe CMS documentation](https://docs.silverstripe.org/en/4/developer_guides/files/allowed_file_types/) for details on configuring MIME type validation.
