@@ -9,9 +9,6 @@ SilverStripe\MimeValidator\MimeUploadValidator:
       - 'image/x-ico'
     ics:
       - 'text/plain'
-    xlsx:
-      - 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      - 'application/zip'
     docx:
       - 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       - 'application/zip'
