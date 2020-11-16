@@ -1,4 +1,3 @@
 da:
   SilverStripe\MimeValidator\MimeUploadValidator:
     FAILEDMIMECHECK: 'MIME validering fejlede: {message}'
-    INVALIDMIME: 'Fil endelsen matcher ikke kendte MIME typer'
