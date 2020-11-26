@@ -1,3 +1,4 @@
 fi:
   SilverStripe\MimeValidator\MimeUploadValidator:
     FAILEDMIMECHECK: 'MIME tarkastus aiheutti virheen: {message}'
+    INVALIDMIME: 'Tiedostopääte ei vastaa yhtään tunnistettua MIME-tyyppiä'
