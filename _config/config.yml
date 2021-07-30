@@ -3,6 +3,9 @@ Name: mimevalidator
 ---
 SilverStripe\MimeValidator\MimeUploadValidator:
   MimeTypes:
+    csv:
+      - 'application/csv'
+      - 'text/plain'
     ico:
       - 'image/vnd.microsoft.icon'
       - 'image/x-icon'
