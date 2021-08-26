@@ -1,5 +1,4 @@
 eo:
   SilverStripe\MimeValidator\MimeUploadValidator:
     FAILEDMIMECHECK: 'Malsukcesis validigo de MIME : {mesaĝo}'
-    INVALIDMIME: 'Sufikso de dosiernomo ne kongruas al konata MIME-tipo'
-
+    INVALIDMIME: 'Tipo de dosiero ne kongruas kun la dosiersufikso (.{extension})'
