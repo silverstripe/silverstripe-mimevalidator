@@ -1,4 +1,3 @@
 ru:
   SilverStripe\MimeValidator\MimeUploadValidator:
     FAILEDMIMECHECK: 'Проверка типа MIME провалена: {message}'
-    INVALIDMIME: 'Расширение файла не соответствует его типу MIME'

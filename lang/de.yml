@@ -1,4 +1,3 @@
 de:
   SilverStripe\MimeValidator\MimeUploadValidator:
     FAILEDMIMECHECK: 'MIME-Validierung fehlgeschlagen: {message}'
-    INVALIDMIME: 'Dateiendung entspricht keinem bekannten MIME-Typ'
