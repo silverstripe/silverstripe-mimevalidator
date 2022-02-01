@@ -16,14 +16,14 @@ and attempts to upload the file.
 
 ## Requirements
 
- * SilverStripe 4.0+
+ * Silverstripe 4.0+
  * fileinfo [PHP extension](http://php.net/manual/en/intro.fileinfo.php)
 
-**Note:** For a SilverStripe 3.x compatible version, please use [the 1.x release line](https://github.com/silverstripe/silverstripe-mimevalidator/tree/1.0).
+**Note:** For a Silverstripe 3.x compatible version, please use [the 1.x release line](https://github.com/silverstripe/silverstripe-mimevalidator/tree/1.0).
 
 ## Installation via Composer
 
-Install with composer by running `composer require silverstripe/mimevalidator` in the root of your SilverStripe project.
+Install with composer by running `composer require silverstripe/mimevalidator` in the root of your Silverstripe project.
 
 Silverstripe CMS Recipe 4.6 and above include this module via `silverstripe/recipe-core`.
 Therefore, it is unnecessary to directly install this module if your project has been upgraded to,
