@@ -23,12 +23,12 @@ class MimeUploadValidatorTest extends SapphireTest
             $tmpFileContent .= '0';
         }
 
-        file_put_contents($tmpFilePath, $tmpFileContent);
+        file_put_contents($tmpFilePath ?? '', $tmpFileContent);
 
         // emulates the $_FILES array
         $tmpFile = [
             'name' => $tmpFileName,
-            'size' => filesize($tmpFilePath),
+            'size' => filesize($tmpFilePath ?? ''),
             'tmp_name' => $tmpFilePath,
             'extension' => 'jpg',
             'error' => UPLOAD_ERR_OK,
@@ -42,7 +42,7 @@ class MimeUploadValidatorTest extends SapphireTest
         $this->assertFalse($result, 'Load failed because file extension does not match excepted MIME type');
         $this->assertEquals('File is not a valid upload', $errors[0]);
 
-        unlink($tmpFilePath);
+        unlink($tmpFilePath ?? '');
     }
 
     public function testGetExpectedMimeTypes()
@@ -56,7 +56,7 @@ class MimeUploadValidatorTest extends SapphireTest
             $tmpFileContent .= '0';
         }
 
-        file_put_contents($tmpFilePath, $tmpFileContent);
+        file_put_contents($tmpFilePath ?? '', $tmpFileContent);
 
         $validator = MimeUploadValidator::create();
         $tmpFile = [
@@ -68,7 +68,7 @@ class MimeUploadValidatorTest extends SapphireTest
         $this->assertCount(1, $expected);
         $this->assertContains('text/plain', $expected);
 
-        unlink($tmpFilePath);
+        unlink($tmpFilePath ?? '');
 
         // Test a physical ico file with capitalised extension
         $tmpFile = [

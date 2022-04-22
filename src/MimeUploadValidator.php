@@ -51,7 +51,7 @@ class MimeUploadValidator extends Upload_Validator
      */
     public function isValidMime()
     {
-        $extension = strtolower(pathinfo($this->tmpFile['name'], PATHINFO_EXTENSION));
+        $extension = strtolower(pathinfo($this->tmpFile['name'] ?? '', PATHINFO_EXTENSION) ?? '');
 
         // we can't check filenames without an extension or no temp file path, let them pass validation.
         if (!$extension || !$this->tmpFile['tmp_name']) {
@@ -91,7 +91,7 @@ class MimeUploadValidator extends Upload_Validator
      */
     public function getExpectedMimeTypes($file)
     {
-        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $extension = strtolower(pathinfo($file['name'] ?? '', PATHINFO_EXTENSION) ?? '');
 
         // if the finfo php extension isn't loaded, we can't complete this check.
         if (!class_exists('finfo')) {
@@ -113,7 +113,7 @@ class MimeUploadValidator extends Upload_Validator
             $mimes = (array) $knownMimes[$extension];
 
             foreach ($mimes as $mime) {
-                if (!in_array($mime, $expectedMimes)) {
+                if (!in_array($mime, $expectedMimes ?? [])) {
                     $expectedMimes[] = $mime;
                 }
             }
@@ -139,7 +139,8 @@ class MimeUploadValidator extends Upload_Validator
      */
     public function compareMime($first, $second)
     {
-        return preg_replace($this->filterPattern, '', $first) === preg_replace($this->filterPattern, '', $second);
+        $b = preg_replace($this->filterPattern ?? '', '', $second ?? '');
+        return preg_replace($this->filterPattern ?? '', '', $first ?? '') === $b;
     }
 
     public function validate()
@@ -151,7 +152,7 @@ class MimeUploadValidator extends Upload_Validator
         try {
             $result = $this->isValidMime();
             if ($result === false) {
-                $extension = strtolower(pathinfo($this->tmpFile['name'], PATHINFO_EXTENSION));
+                $extension = strtolower(pathinfo($this->tmpFile['name'] ?? '', PATHINFO_EXTENSION) ?? '');
                 $this->errors[] = _t(
                     __CLASS__ . '.INVALIDMIME',
                     'File type does not match extension (.{extension})',
