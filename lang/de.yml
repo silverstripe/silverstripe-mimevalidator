@@ -1,3 +1,4 @@
 de:
   SilverStripe\MimeValidator\MimeUploadValidator:
     FAILEDMIMECHECK: 'MIME-Validierung fehlgeschlagen: {message}'
+    INVALIDMIME: 'Dateityp stimmt nicht mit der Endung überein (.{extension})'
