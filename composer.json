@@ -19,7 +19,7 @@
     ],
     "require": {
         "ext-fileinfo": "*",
-        "silverstripe/framework": "4.13.0-beta1",
+        "silverstripe/framework": "4.13.x-dev",
         "php": "^7.4 || ^8"
     },
     "require-dev": {
