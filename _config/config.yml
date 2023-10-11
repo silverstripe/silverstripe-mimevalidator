@@ -3,6 +3,9 @@ Name: mimevalidator
 ---
 SilverStripe\MimeValidator\MimeUploadValidator:
   MimeTypes:
+    brf:
+      - 'text/plain'
+      - 'application/octet-stream'
     csv:
       - 'application/csv'
       - 'text/plain'
