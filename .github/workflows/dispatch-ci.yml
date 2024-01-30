@@ -1,9 +1,9 @@
 name: Dispatch CI
 
 on:
-  # At 12:10 PM UTC, only on Thursday and Friday
+  # At 7:35 PM UTC, only on Saturday and Sunday
   schedule:
-    - cron: '10 12 * * 4,5'
+    - cron: '35 19 * * 6,0'
 
 jobs:
   dispatch-ci:
