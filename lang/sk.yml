@@ -1,0 +1,4 @@
+sk:
+  SilverStripe\MimeValidator\MimeUploadValidator:
+    FAILEDMIMECHECK: 'Overenie MIME zlyhalo: {message}'
+    INVALIDMIME: 'Typ súboru sa nezhoduje s príponou (.{extension})'
