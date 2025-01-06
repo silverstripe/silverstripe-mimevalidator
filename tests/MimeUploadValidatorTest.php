@@ -16,7 +16,7 @@ class MimeUploadValidatorTest extends SapphireTest
     {
         // setup plaintext file with invalid extension
         $tmpFileName = 'UploadTest-testUpload.jpg';
-        $tmpFilePath = TEMP_FOLDER . '/' . $tmpFileName;
+        $tmpFilePath = TEMP_PATH . '/' . $tmpFileName;
         $tmpFileContent = '';
 
         for ($i = 0; $i < 10000; $i++) {
@@ -49,7 +49,7 @@ class MimeUploadValidatorTest extends SapphireTest
     {
         // Setup a file with a capitalised extension and try to match it against a lowercase file.
         $tmpFileName = 'text.TXT';
-        $tmpFilePath = TEMP_FOLDER . '/' . $tmpFileName;
+        $tmpFilePath = TEMP_PATH . '/' . $tmpFileName;
         $tmpFileContent = '';
 
         for ($i = 0; $i < 10000; $i++) {
