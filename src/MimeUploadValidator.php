@@ -7,6 +7,8 @@ use Exception;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Control\HTTP;
 use SilverStripe\Assets\Upload_Validator;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Adds an additional validation rule to Upload_Validator that attempts to detect
@@ -51,10 +53,10 @@ class MimeUploadValidator extends Upload_Validator
      */
     public function isValidMime()
     {
-        $extension = strtolower(pathinfo($this->tmpFile['name'] ?? '', PATHINFO_EXTENSION) ?? '');
+        $extension = strtolower($this->tmpFile->getClientOriginalExtension());
 
         // we can't check filenames without an extension or no temp file path, let them pass validation.
-        if (!$extension || !$this->tmpFile['tmp_name']) {
+        if (!$extension || !$this->tmpFile->getPathname()) {
             return true;
         }
 
@@ -66,10 +68,10 @@ class MimeUploadValidator extends Upload_Validator
         }
 
         $fileInfo = new finfo(FILEINFO_MIME_TYPE);
-        $foundMime = $fileInfo->file($this->tmpFile['tmp_name']);
+        $foundMime = $fileInfo->file($this->tmpFile->getPathname());
         if (!$foundMime) {
             throw new MimeUploadValidatorException(
-                sprintf('Could not find a MIME type for file %s', $this->tmpFile['tmp_name'])
+                sprintf('Could not find a MIME type for file %s', $this->tmpFile->getPathname())
             );
         }
 
@@ -84,14 +86,11 @@ class MimeUploadValidator extends Upload_Validator
 
     /**
      * Fetches an array of valid mimetypes.
-     *
-     * @param $file
-     * @return array
      * @throws MimeUploadValidatorException
      */
-    public function getExpectedMimeTypes($file)
+    public function getExpectedMimeTypes(UploadedFile $file): array
     {
-        $extension = strtolower(pathinfo($file['name'] ?? '', PATHINFO_EXTENSION) ?? '');
+        $extension = strtolower($file->getClientOriginalExtension());
 
         // if the finfo php extension isn't loaded, we can't complete this check.
         if (!class_exists('finfo')) {
@@ -152,7 +151,7 @@ class MimeUploadValidator extends Upload_Validator
         try {
             $result = $this->isValidMime();
             if ($result === false) {
-                $extension = strtolower(pathinfo($this->tmpFile['name'] ?? '', PATHINFO_EXTENSION) ?? '');
+                $extension = strtolower($this->tmpFile->getClientOriginalExtension());
                 $this->errors[] = _t(
                     __CLASS__ . '.INVALIDMIME',
                     'File type does not match extension (.{extension})',
