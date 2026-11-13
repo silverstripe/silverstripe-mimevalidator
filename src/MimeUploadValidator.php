@@ -19,6 +19,12 @@ use SilverStripe\Assets\Upload_Validator;
 class MimeUploadValidator extends Upload_Validator
 {
     /**
+     * Additional MIME types to accept for a file extension, keyed by extension.
+     * These are used in addition to the MIME types configured on HTTP.MimeTypes.
+     */
+    private static array $MimeTypes = [];
+
+    /**
      * The preg_replace() pattern to use against MIME types. Used to strip out
      * useless characters so matching of MIME types can be fuzzy.
      *
